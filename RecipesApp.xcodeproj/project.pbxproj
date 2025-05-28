@@ -14,19 +14,11 @@
 			remoteGlobalIDString = DD007B3B2DE69F600030E281;
 			remoteInfo = RecipesApp;
 		};
-		DD007B542DE69F620030E281 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DD007B342DE69F600030E281 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DD007B3B2DE69F600030E281;
-			remoteInfo = RecipesApp;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		DD007B3C2DE69F600030E281 /* RecipesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD007B492DE69F620030E281 /* RecipesAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipesAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DD007B532DE69F620030E281 /* RecipesAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecipesAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -38,11 +30,6 @@
 		DD007B4C2DE69F620030E281 /* RecipesAppTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = RecipesAppTests;
-			sourceTree = "<group>";
-		};
-		DD007B562DE69F620030E281 /* RecipesAppUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = RecipesAppUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -62,13 +49,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DD007B502DE69F620030E281 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -77,7 +57,6 @@
 			children = (
 				DD007B3E2DE69F600030E281 /* RecipesApp */,
 				DD007B4C2DE69F620030E281 /* RecipesAppTests */,
-				DD007B562DE69F620030E281 /* RecipesAppUITests */,
 				DD007B3D2DE69F600030E281 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,7 +66,6 @@
 			children = (
 				DD007B3C2DE69F600030E281 /* RecipesApp.app */,
 				DD007B492DE69F620030E281 /* RecipesAppTests.xctest */,
-				DD007B532DE69F620030E281 /* RecipesAppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,29 +118,6 @@
 			productReference = DD007B492DE69F620030E281 /* RecipesAppTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		DD007B522DE69F620030E281 /* RecipesAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DD007B632DE69F620030E281 /* Build configuration list for PBXNativeTarget "RecipesAppUITests" */;
-			buildPhases = (
-				DD007B4F2DE69F620030E281 /* Sources */,
-				DD007B502DE69F620030E281 /* Frameworks */,
-				DD007B512DE69F620030E281 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DD007B552DE69F620030E281 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				DD007B562DE69F620030E281 /* RecipesAppUITests */,
-			);
-			name = RecipesAppUITests;
-			packageProductDependencies = (
-			);
-			productName = RecipesAppUITests;
-			productReference = DD007B532DE69F620030E281 /* RecipesAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -177,10 +132,6 @@
 						CreatedOnToolsVersion = 16.3;
 					};
 					DD007B482DE69F620030E281 = {
-						CreatedOnToolsVersion = 16.3;
-						TestTargetID = DD007B3B2DE69F600030E281;
-					};
-					DD007B522DE69F620030E281 = {
 						CreatedOnToolsVersion = 16.3;
 						TestTargetID = DD007B3B2DE69F600030E281;
 					};
@@ -202,7 +153,6 @@
 			targets = (
 				DD007B3B2DE69F600030E281 /* RecipesApp */,
 				DD007B482DE69F620030E281 /* RecipesAppTests */,
-				DD007B522DE69F620030E281 /* RecipesAppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -216,13 +166,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DD007B472DE69F620030E281 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DD007B512DE69F620030E281 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -246,13 +189,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DD007B4F2DE69F620030E281 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -260,11 +196,6 @@
 			isa = PBXTargetDependency;
 			target = DD007B3B2DE69F600030E281 /* RecipesApp */;
 			targetProxy = DD007B4A2DE69F620030E281 /* PBXContainerItemProxy */;
-		};
-		DD007B552DE69F620030E281 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DD007B3B2DE69F600030E281 /* RecipesApp */;
-			targetProxy = DD007B542DE69F620030E281 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -405,6 +336,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -433,6 +365,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -484,40 +417,6 @@
 			};
 			name = Release;
 		};
-		DD007B642DE69F620030E281 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6P7CDF25AG;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.axnwaxnw.RecipesAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = RecipesApp;
-			};
-			name = Debug;
-		};
-		DD007B652DE69F620030E281 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6P7CDF25AG;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.axnwaxnw.RecipesAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = RecipesApp;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -544,15 +443,6 @@
 			buildConfigurations = (
 				DD007B612DE69F620030E281 /* Debug */,
 				DD007B622DE69F620030E281 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DD007B632DE69F620030E281 /* Build configuration list for PBXNativeTarget "RecipesAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DD007B642DE69F620030E281 /* Debug */,
-				DD007B652DE69F620030E281 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

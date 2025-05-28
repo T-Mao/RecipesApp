@@ -1,0 +1,30 @@
+# === Xcode & Swift ===
+DerivedData/
+build/
+*.xcworkspace
+*.xccheckout
+*.xcuserstate
+**/xcuserdata/
+
+# Swift Package Manager
+.build/
+Packages/
+Package.resolved
+
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# macOS 系统
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+
+# Xcode automatic settings
+*.moved-aside
+*.swp
+*.lock
+
