@@ -1,24 +1,117 @@
-//
-//  ContentView.swift
-//  RecipesApp
-//
-//  Created by Tongze Mao on 5/27/25.
-//
-
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject private var viewModel = RecipesListViewModel()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            content
+                .navigationTitle("Recipes")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            viewModel.fetchRecipes()
+                        } label: {
+                            Image(systemName: "arrow.clockwise")
+                        }
+                    }
+                }
         }
-        .padding()
+        .onAppear { viewModel.fetchRecipes() }
+    }
+
+    @ViewBuilder
+    private var content: some View {
+        switch viewModel.state {
+        case .idle, .loading:
+            ProgressView("Loading…")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+        case .failure(let error):
+            VStack(spacing: 8) {
+                Text("Failed to load recipes")
+                    .font(.headline)
+                Text(error.localizedDescription)
+                    .font(.caption)
+                    .multilineTextAlignment(.center)
+                Button("Retry") { viewModel.fetchRecipes() }
+                    .buttonStyle(.borderedProminent)
+            }
+            .padding()
+
+        case .empty:
+            emptyStateView
+
+        case .success(let recipes):
+            List(recipes) { recipe in
+                RecipeRow(recipe: recipe)
+            }
+            .listStyle(.plain)
+            .refreshable {
+                viewModel.fetchRecipes()
+            }
+        }
+    }
+
+    // MARK: - Empty State
+    @ViewBuilder
+    private var emptyStateView: some View {
+        if #available(iOS 17, *) {
+            ContentUnavailableView(
+                "No Recipes",
+                systemImage: "fork.knife",
+                description: Text("Swipe down to refresh.")
+            )
+        } else {
+            VStack(spacing: 12) {
+                Image(systemName: "fork.knife")
+                    .font(.system(size: 40))
+                    .foregroundStyle(.secondary)
+                Text("No Recipes")
+                    .font(.headline)
+                Text("Swipe down to refresh.")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
     }
 }
 
-#Preview {
-    ContentView()
+// MARK: - Row view
+private struct RecipeRow: View {
+    let recipe: Recipe
+
+    var body: some View {
+        HStack(spacing: 12) {
+            AsyncImage(url: recipe.photoURLSmall) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(width: 60, height: 60)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 60, height: 60)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                case .failure:
+                    Image(systemName: "photo")
+                        .frame(width: 60, height: 60)
+                        .background(.quaternary, in: RoundedRectangle(cornerRadius: 8))
+                @unknown default:
+                    EmptyView()
+                }
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text(recipe.name)
+                    .font(.headline)
+                Text(recipe.cuisine)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .padding(.vertical, 4)
+    }
 }
