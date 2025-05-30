@@ -9,7 +9,8 @@ final class RecipesListViewModel: ObservableObject {
     @Published private(set) var state: LoadingState<[Recipe]> = .idle
     @Published var selectedFilter: CuisineFilter = .all
     @Published private(set) var cuisines: [String] = []
-    
+    @Published var searchText: String = ""
+
     // MARK: - Dependencies
     private let api: RecipeAPI
     private var task: Task<Void, Never>?
@@ -44,7 +45,13 @@ final class RecipesListViewModel: ObservableObject {
         case .specific(let name): return all.filter { $0.cuisine == name }
         }
     }
-
+    
+    var visibleRecipes: [Recipe] {
+        let base = filteredRecipes
+        guard !searchText.isEmpty else { return base }
+        return base.filter { $0.name.localizedCaseInsensitiveContains(searchText) }
+    }
+    
     func cancel() {
         task?.cancel()
     }

@@ -9,6 +9,9 @@ struct ContentView: View {
                 content
             }
             .navigationTitle("Recipes")
+            .searchable(text: $viewModel.searchText,
+                        placement: .navigationBarDrawer(displayMode: .automatic),
+                        prompt: "Search recipes")
             .toolbar {
                 // picker
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -50,7 +53,7 @@ struct ContentView: View {
             emptyStateView
 
         case .success:
-            List(viewModel.filteredRecipes) { recipe in
+            List(viewModel.visibleRecipes) { recipe in
                 NavigationLink {
                     RecipeDetailView(recipe: recipe)
                 } label: {
