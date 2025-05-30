@@ -84,25 +84,20 @@ private struct RecipeRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            AsyncImage(url: recipe.photoURLSmall) { phase in
-                switch phase {
-                case .empty:
+            CachedAsyncImage(
+                url: recipe.photoURLSmall,
+                placeholder: {
                     ProgressView()
                         .frame(width: 60, height: 60)
-                case .success(let image):
+                },
+                content: { image in
                     image
                         .resizable()
                         .scaledToFill()
                         .frame(width: 60, height: 60)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
-                case .failure:
-                    Image(systemName: "photo")
-                        .frame(width: 60, height: 60)
-                        .background(.quaternary, in: RoundedRectangle(cornerRadius: 8))
-                @unknown default:
-                    EmptyView()
                 }
-            }
+            )
 
             VStack(alignment: .leading, spacing: 4) {
                 Text(recipe.name)
