@@ -5,21 +5,28 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            content
-                .navigationTitle("Recipes")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            viewModel.fetchRecipes()
-                        } label: {
-                            Image(systemName: "arrow.clockwise")
+            VStack {
+                content
+            }
+            .navigationTitle("Recipes")
+            .toolbar {
+                // picker
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Picker("Cuisine", selection: $viewModel.selectedFilter) {
+                        Text("All").tag(CuisineFilter.all)
+                        ForEach(viewModel.cuisines, id: \.self) { name in
+                            Text(name).tag(CuisineFilter.specific(name))
                         }
                     }
+                    .pickerStyle(.menu)
+                    .disabled(viewModel.cuisines.isEmpty)
                 }
+            }
         }
         .onAppear { viewModel.fetchRecipes() }
     }
 
+    // MARK: - content
     @ViewBuilder
     private var content: some View {
         switch viewModel.state {
@@ -42,18 +49,20 @@ struct ContentView: View {
         case .empty:
             emptyStateView
 
-        case .success(let recipes):
-            List(recipes) { recipe in
-                RecipeRow(recipe: recipe)
+        case .success:
+            List(viewModel.filteredRecipes) { recipe in
+                NavigationLink {
+                    RecipeDetailView(recipe: recipe)
+                } label: {
+                    RecipeRow(recipe: recipe)
+                }
             }
             .listStyle(.plain)
-            .refreshable {
-                viewModel.fetchRecipes()
-            }
+            .refreshable { viewModel.fetchRecipes() }
         }
     }
 
-    // MARK: - Empty State
+    // MARK: - empty
     @ViewBuilder
     private var emptyStateView: some View {
         if #available(iOS 17, *) {
@@ -78,7 +87,7 @@ struct ContentView: View {
     }
 }
 
-// MARK: - Row view
+// MARK: - row
 private struct RecipeRow: View {
     let recipe: Recipe
 
