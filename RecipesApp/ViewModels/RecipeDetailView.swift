@@ -2,61 +2,60 @@ import SwiftUI
 
 struct RecipeDetailView: View {
     let recipe: Recipe
+    @State private var sheetURL: URL?
 
     var body: some View {
         ScrollView {
+            // image
             CachedAsyncImage(
                 url: recipe.photoURLLarge ?? recipe.photoURLSmall,
-                placeholder: {
-                    ZStack { Color(.secondarySystemBackground); ProgressView() }
-                        .frame(height: 240)
-                },
+                placeholder: { ZStack { Color(.secondarySystemBackground); ProgressView() }.frame(height: 240) },
                 content: { image in
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(maxWidth: .infinity, maxHeight: 300)
-                        .clipped()
+                    image.resizable()
+                         .scaledToFill()
+                         .frame(maxWidth: .infinity, maxHeight: 300)
+                         .clipped()
                 }
             )
 
-            VStack(alignment: .leading, spacing: 12) {
-                Text(recipe.name)
-                    .font(.largeTitle).bold()
+            VStack(alignment: .leading, spacing: 16) {
+                Text(recipe.name).font(.largeTitle).bold()
+                Text(recipe.cuisine).font(.title3).foregroundStyle(.secondary)
 
-                Text("Cuisine: \(recipe.cuisine)")
-                    .font(.title3)
-                    .foregroundStyle(.secondary)
-
-                if let source = recipe.sourceURL {
-                    Link(destination: source) {
-                        Label("View Original Source", systemImage: "safari")
+                // video button
+                if let yt = recipe.youtubeURL {
+                    Button {
+                        sheetURL = yt
+                    } label: {
+                        Label("Watch Video", systemImage: "play.rectangle")
+                            .frame(maxWidth: .infinity)
                     }
+                    .buttonStyle(.borderedProminent)
                 }
 
-                if let youtube = recipe.youtubeURL {
-                    Link(destination: youtube) {
-                        Label("Watch on YouTube", systemImage: "play.rectangle")
+                // web button
+                if let source = recipe.sourceURL {
+                    Button {
+                        sheetURL = source
+                    } label: {
+                        Label("View Original Recipe", systemImage: "safari")
+                            .frame(maxWidth: .infinity)
                     }
+                    .buttonStyle(.bordered)
                 }
             }
-            .padding()
+            .padding(.horizontal)
+            .padding(.bottom, 40)
         }
         .navigationTitle(recipe.name)
         .navigationBarTitleDisplayMode(.inline)
+        // Safari sheet
+        .sheet(item: $sheetURL) { url in
+            SafariSheet(url: url)
+        }
     }
 }
 
-#Preview {
-    RecipeDetailView(
-        recipe: .init(
-            id: UUID(),
-            name: "Test",
-            cuisine: "Foo",
-            photoURLLarge: nil,
-            photoURLSmall: nil,
-            sourceURL: nil,
-            youtubeURL: nil
-        )
-    )
+extension URL: Identifiable {
+    public var id: String { absoluteString }
 }
